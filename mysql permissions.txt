@@ -1,0 +1,57 @@
+Creating new user in mysql and granting permissions to him
+
+open ubuntu ec2 instance
+
+[]$ sudo apt-get  update
+sudo mysql
+mysql> select user, host from mysql.user
+	---------------------------------
+	|user		|host		|
+	---------------------------------
+	|mysql.sys	|localhost	|
+	|root		|localhost	|
+	----------------------------------
+mysql>create user 'bob'@'localhost' identified by 'password1'
+mysql>show grants for 'bob'@'localhost';
+	it shows permissions of bob
+mysql>show grants;
+	it shows the privileges of the current user in this case it is root
+mysql>grant select on *.* to 'bob'@'localhost';
+mysql>grant insert on classDB.users to 'bob'@localhost';
+mysql>show grants for 'bob'@'localhost' 
+	it shows 
+	select *.*
+	insert on class.DB
+mysql>use classDB;
+mysql>desc users;
+mysql>grant update(age) on calssDB.users to 'bob'@'localhost';
+mysql>show grants for 'bob'@'localhost';
+	it shows
+	select on *.* 
+	insert on classDB.users
+	update age on classDB.users
+mysql>revoke insert on classDB.users to 'bob'@'localhost';
+mysql>create user 'sue'@'localhost' identified by '12345';
+mysql>select host, user from mysql.users;
+mysql>grant all privileges on *.* to 'sue'@'localhost' with grant option;
+	with grant option means she can allot permissions to others as well
+mysql>exit
+
+[   ]$ mysql -u sue -p 
+Enter passwors:
+mysql>show grants;
+mysql>drop user 'bob'@'loalhost';
+mysql>select user, host from mysql.users;
+mysql>create user 'nancy' identified by '123456';
+mysql>create user 'nancy'@'localhost' identified by '123456';
+mysql>create user 'nancy'@'192.168.1.2' identified by '123456';
+mysql>select user, host from mysql.users;
+	----------------------------------------
+        |users		|	host		|
+	-----------------------------------------
+	|nancy		|	%		|
+	|nancy		|	lcoalhost	|
+	|nancy		|	192.168.1.2	|
+	|root		|	localost	|
+	-----------------------------------------
+under the host % means nancy can log in form any where

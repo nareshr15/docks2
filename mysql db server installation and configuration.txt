@@ -1,0 +1,33 @@
+open ubuntu ec2 instance
+
+sudo apt-get update
+sudo apt-get install mysql-server mysql-client -y
+	it shows
+	could not get lock /var/lib/dpkg/lock
+	unable to lock the administration directory (/var/lib/dpkg/), is another process using it
+sudo rm -rf /var/lib/dpkg/lock
+sudo apt-get install mysql-server mysql-client -y
+	mysql-server for db server
+	mysql-client for connecting to client
+	If u want to connect from other server(client) to this server (db server) u have to install mysql-client on the client server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+	it starts the service on boot up time
+
+COnfiguration
+*************
+[gaurav@server]$: sudo mysql_secure_installation
+Enter password:
+remove anonymous user?:Y
+disallow root login?: Y
+	we dont want root user of client server to login as he has the super power and we dont want him to login with super powers and we want our db to be secured. So we create users and add privileges to them and they can login and execute tasks which we allow him.
+ remove test db? y
+reload privilege tables now? Y
+All done!
+
+[gaurav@server]$ sudo mysql -u root -p
+Enter password
+mysql> show databases;
+
+So, we have successfully configured the database server.
+*********************************************************
