@@ -1,0 +1,14 @@
+git remote add origin https://github.com/nareshr15/docksremote.git
+git remote -v
+	it shows
+	origin  https://github.com/nareshr15/docksremote.git (fetch)
+	origin  https://github.com/nareshr15/docksremote.git (push)
+Now, if you delete the remote repo "docksremote" or 
+     if you want to change the remote repo to other origin we have to use set-url command.
+
+git remote set-url origin https://github.com/nareshr15/docks2.git
+	set-url: it replaces the existing origin with new origin
+git remote -v
+	it shows
+	origin  https://github.com/nareshr15/docks2.git (fetch)
+	origin  https://github.com/nareshr15/docks2.git (push)
